@@ -1,4 +1,4 @@
-Proyecto 2 - Lenguajes de Programación 2020
+Proyecto 2 - Lenguajes de Programación 2020                                                                                                                                                                             
 Grupo #2
 Integrantes:
 DANIEL SANTIAGO SALGADO PINTO
@@ -7,7 +7,7 @@ MIGUEL ANGEL FLORES RAMOS
 RENATO DAVID LIZARDO VARELA
 
 Para la parte grafica se necesita:
-sudo apt-get update
+sudo apt-get
 sudo apt-get install -y libgirepository1.0-dev libwebkit2gtk-4.0-dev libgtksourceview-3.0-dev
 Para las dependencias se necesita:
 cabal v2-update
