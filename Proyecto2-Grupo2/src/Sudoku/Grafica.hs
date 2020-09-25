@@ -144,7 +144,6 @@ buildOverlayLayout g b = do
     overlay <- unsafeBuildObj Overlay b "init_overlay"
     diffBox <- unsafeBuildObj Box b "popup_menu"
     #addOverlay overlay diffBox
-    difficultyBtns b g
     #show overlay
 
 buildLogo :: T.Text -> Builder -> IO ()
@@ -257,22 +256,7 @@ checkBtn pulse' g = do
         [] -> flashColor pulse' g cSpace Green
         xs -> flashColor pulse' g xs Red
 
-difficultyBtns :: Builder -> Grid -> IO ()
-difficultyBtns b g = do
-    menuBox <- unsafeBuildObj Box b "popup_menu"
-    easyBtn <- unsafeBuildObj Button b "easy_btn"
-    normalBtn <- unsafeBuildObj Button b "normal_btn"
-    hardBtn <- unsafeBuildObj Button b "hard_btn"
-    on easyBtn #clicked do
-        #hide menuBox
-        gridRegen g 30
-    on normalBtn #clicked do
-        #hide menuBox
-        gridRegen g 50
-    on hardBtn #clicked do
-        #hide menuBox
-        gridRegen g 70
-    return ()
+
 
 newGameBtn :: Builder -> IO ()
 newGameBtn b = do
