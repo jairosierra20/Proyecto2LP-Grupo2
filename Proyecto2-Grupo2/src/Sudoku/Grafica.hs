@@ -54,13 +54,14 @@ dfltEnv = do
     lc <- newIORef undefined :: IO (IORef Button)
     cp <- T.pack <$> getDataFileName "gui.css"
     up <- T.pack <$> getDataFileName "app.ui"
+    lp <- T.pack <$> getDataFileName "sudokuicons.ttf"
     return $ Env
         { lastCell = lc
         , pulse    = 350000
         , cssPath  = cp
         , cssPrio  = 600 -- css priority
         , uiPath   = up
-	, logoPath = lp}
+	, fontPath = lp}
 
 -- | Venta grafica
 applyCss :: T.Text -> Int -> Window -> IO ()
@@ -195,7 +196,7 @@ buildApp e = do
     builder <- builderNewFromFile (uiPath e)
     board' <- buildBoard (lastCell e) builder
     buildOverlayLayout board' builder
-    buildLogo (logoPath e) builder
+    buildFont (fontPath e)
     buildCtrlLayout (pulse e) board' builder
     kp <- buildKeypad (lastCell e) (pulse e) board' builder
     win <- buildWindow builder
