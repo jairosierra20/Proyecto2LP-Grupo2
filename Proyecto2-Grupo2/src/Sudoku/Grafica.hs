@@ -38,7 +38,8 @@ data Env = Env { lastCell :: IORef Button
                , pulse    :: Int
                , cssPath  :: T.Text
                , cssPrio  :: Int
-               , uiPath   :: T.Text}
+               , uiPath   :: T.Text
+	       , logoPath :: T.Text }
 
 data App = App { keypad :: Popover
                , board  :: Grid
@@ -58,7 +59,8 @@ dfltEnv = do
         , pulse    = 350000
         , cssPath  = cp
         , cssPrio  = 600 -- css priority
-        , uiPath   = up}
+        , uiPath   = up
+	, logoPath = lp}
 
 -- | Venta grafica
 applyCss :: T.Text -> Int -> Window -> IO ()
@@ -193,6 +195,7 @@ buildApp e = do
     builder <- builderNewFromFile (uiPath e)
     board' <- buildBoard (lastCell e) builder
     buildOverlayLayout board' builder
+    buildLogo (logoPath e) builder
     buildCtrlLayout (pulse e) board' builder
     kp <- buildKeypad (lastCell e) (pulse e) board' builder
     win <- buildWindow builder
